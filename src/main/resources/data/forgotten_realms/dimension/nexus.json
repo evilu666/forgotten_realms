@@ -1,0 +1,12 @@
+{
+  "type": "forgotten_realms:nexus",
+  "generator": {
+    "type": "forgotten_realms:nexus",
+    "seed": 0,
+    "settings": "forgotten_realms:nexus",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "forgotten_realms:central_nexus"
+    }
+  }
+}
