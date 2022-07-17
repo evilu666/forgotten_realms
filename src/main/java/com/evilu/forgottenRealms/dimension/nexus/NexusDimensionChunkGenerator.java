@@ -7,6 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 import com.evilu.forgottenRealms.ForgottenRealmsMod;
+import com.evilu.forgottenRealms.registry.BiomeRegistry;
 import com.evilu.forgottenRealms.structure.IslandStructures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.ChunkPos;
@@ -31,6 +33,8 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
+import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * NexusWorldProvider
@@ -38,7 +42,7 @@ import net.minecraft.world.level.levelgen.blending.Blender;
 public class NexusDimensionChunkGenerator extends ChunkGenerator {
 
     public static final Codec<NexusDimensionChunkGenerator> CODEC = RecordCodecBuilder.create((instance) -> {
-        return commonCodec(instance).apply(instance, instance.stable(structureSet -> new NexusDimensionChunkGenerator()));
+        return commonCodec(instance).apply(instance, instance.stable(structureSet -> new NexusDimensionChunkGenerator(structureSet)));
     });
 
     public static int SPAWN_HEIGHT = 64;
@@ -46,8 +50,11 @@ public class NexusDimensionChunkGenerator extends ChunkGenerator {
     private static final BlockPos START_ISLAND_POS = new BlockPos(-11, 50, -11);
     private static final Set<ChunkPos> START_ISLAND_CHUNKS = IslandStructures.START_ISLAND.getChunks(START_ISLAND_POS);
 
-    public NexusDimensionChunkGenerator() {
-        super(null, Optional.empty(), new FixedBiomeSource(Holder.direct(BuiltinRegistries.BIOME.get(new ResourceLocation(ForgottenRealmsMod.MODID, "central_nexus")))));
+    @ObjectHolder("forgotten_realms:central_nexus")
+    public static final Biome CENTRAL_NEXUS_BIOME = null;
+
+    public NexusDimensionChunkGenerator(final Registry<StructureSet> structureSet) {
+        super(structureSet, Optional.empty(), new FixedBiomeSource(Holder.direct(CENTRAL_NEXUS_BIOME)));
     }
 
     @Override
