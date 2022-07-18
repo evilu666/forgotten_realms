@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
+        maven {url = 'https://maven.minecraftforge.net' }
         maven {url = "https://maven.kyrptonaught.dev"}
         mavenCentral()
     }
@@ -47,6 +47,11 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
+        	//curious api stuff
+			property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+        	
+        
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -72,6 +77,11 @@ minecraft {
         }
 
         server {
+        	//curious stuff
+        	property 'mixin.env.remapRefMap', 'true'
+			property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+        
+        
             workingDirectory project.file('run')
 
             property 'forge.logging.markers', 'REGISTRIES'
@@ -146,6 +156,11 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    
 }
 
 dependencies {
@@ -153,6 +168,10 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.54'
+
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1:api")
+
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
