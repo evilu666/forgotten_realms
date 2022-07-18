@@ -9,10 +9,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-
 public class ItemRegistry {
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ForgottenRealmsMod.MODID);
+
+    public static final RegistryObject<Item> FIRE_AMULET = ITEMS.register("fire_amulet", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+    public static final RegistryObject<Item> WATER_AMULET = ITEMS.register("water_amulet", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+    public static final RegistryObject<Item> MING_RING = ITEMS.register("mining_ring", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
 
     public static void registerItems() {
