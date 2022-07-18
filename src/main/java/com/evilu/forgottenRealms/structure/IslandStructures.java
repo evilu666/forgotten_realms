@@ -56,8 +56,8 @@ public class IslandStructures {
 
   public static final StructureTemplate<IslandStructureBlockType> OVERWORLD_ISLAND = structure("island")
       .withBlock(IslandStructureBlockType.BASIS, Blocks.STONE)
-      .withBlock(IslandStructureBlockType.ACCENT_1, Blocks.GRASS)
-      .withBlock(IslandStructureBlockType.ACCENT_2, Blocks.OAK_LEAVES)
+      .withBlock(IslandStructureBlockType.ACCENT_1, Blocks.GRASS_BLOCK)
+      .withBlock(IslandStructureBlockType.ACCENT_2, Blocks.MOSSY_COBBLESTONE)
       .withBlock(IslandStructureBlockType.TOP_1, Blocks.COBBLESTONE)
       .withBlock(IslandStructureBlockType.TOP_2, Blocks.STONE_SLAB)
       .withBlock(IslandStructureBlockType.TOP_3, Blocks.COBBLESTONE_SLAB)
