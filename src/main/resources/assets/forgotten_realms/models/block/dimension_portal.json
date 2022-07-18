@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench <3",
 	"textures": {
-		"1": "forgotten_realms:dimension_portal_block"
+		"1": "forgotten_realms:block/dimension_portal"
 	},
 	"elements": [
 		{
@@ -9,6 +9,10 @@
 			"to": [16, 12, 16],
 			"faces": {
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 4, 16, 12], "texture": "#1"},
+				"west": {"uv": [0, 4, 16, 12], "texture": "#1"},
+				"north": {"uv": [0, 4, 16, 12], "texture": "#1"},
+				"south": {"uv": [0, 4, 16, 12], "texture": "#1"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
 			}
 		}

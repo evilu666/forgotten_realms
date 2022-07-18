@@ -1,19 +1,13 @@
 package com.evilu.forgottenRealms.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.evilu.forgottenRealms.ForgottenRealmsMod;
 import com.evilu.forgottenRealms.dimension.nexus.NexusDimensionChunkGenerator;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 
 /**

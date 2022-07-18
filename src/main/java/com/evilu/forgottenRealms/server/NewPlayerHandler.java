@@ -23,12 +23,12 @@ public class NewPlayerHandler {
 
 
     @SubscribeEvent
-    public void onPlayerLoadsWorld(final WorldEvent.Load event) {
+    public static void onPlayerLoadsWorld(final WorldEvent.Load event) {
         world = event.getWorld();
     }
 
     @SubscribeEvent
-    public void playerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event) {
+    public static void playerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer) {
             final ServerPlayer player = (ServerPlayer) event.getPlayer();
             if (world != null && !world.players().contains(player)) {
@@ -39,6 +39,8 @@ public class NewPlayerHandler {
             }
         }
     }
+
+
 
 
 

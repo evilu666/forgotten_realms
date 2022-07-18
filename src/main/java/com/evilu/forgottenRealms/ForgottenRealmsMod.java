@@ -1,5 +1,7 @@
 package com.evilu.forgottenRealms;
 
+import com.evilu.forgottenRealms.registry.BiomeRegistry;
+import com.evilu.forgottenRealms.registry.BiomeSourceRegistry;
 import com.evilu.forgottenRealms.registry.BlockRegistry;
 import com.evilu.forgottenRealms.registry.ChunkGeneratorRegistry;
 import com.evilu.forgottenRealms.registry.ItemRegistry;
@@ -23,6 +25,8 @@ public class ForgottenRealmsMod
 
         BlockRegistry.registerBlocks();
         ItemRegistry.registerItems();
+        BiomeRegistry.registerBiomes();
+        BiomeSourceRegistry.registerBiomeSources();
         ChunkGeneratorRegistry.registerGenerators();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
