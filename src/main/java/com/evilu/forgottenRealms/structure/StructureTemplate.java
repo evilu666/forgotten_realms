@@ -49,4 +49,8 @@ public class StructureTemplate<T extends Enum<T> & BlockType> extends BaseStruct
     public void generate(final ChunkAccess chunkAccess, final BlockPos pos) {
         generateStructureChunk(stateMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get())), chunkAccess, pos);
     }
+
+    public PlaceableStructure<T> placeAt(final BlockPos position) {
+        return new PlaceableStructure<>(position, this);
+    }
 }

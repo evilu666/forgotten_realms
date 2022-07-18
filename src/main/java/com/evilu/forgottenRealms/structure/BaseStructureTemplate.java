@@ -1,12 +1,6 @@
 package com.evilu.forgottenRealms.structure;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Predicate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import java.io.BufferedReader;
@@ -16,6 +10,7 @@ import java.io.InputStreamReader;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 
@@ -32,14 +27,18 @@ public class BaseStructureTemplate<T extends BaseStructureTemplate.BlockType> {
     private final Map<BlockPos, Character> template;
 
     protected BaseStructureTemplate(final String path) {
+		this(path, false);
+	}
+
+    protected BaseStructureTemplate(final String path, final boolean includeWhitespace) {
         int layers = 0;
         int width = 0;
         int depth = 0;
 
-        template = new HashMap<>();
+        template = new LinkedHashMap<>();
 
         for (int i = 0; i < 999; ++i) {
-            final String layer_path = String.format("structure_templates/%03d", i+1);
+            final String layer_path = String.format("%s/%03d", path, i+1);
             final InputStream is = BaseStructureTemplate.class.getClassLoader().getResourceAsStream(layer_path);
             if (is != null) {
                 layers++;
@@ -61,15 +60,19 @@ public class BaseStructureTemplate<T extends BaseStructureTemplate.BlockType> {
                 }
 
                 for (int l = 0; l < lines.size(); ++l) {
-                    final String line = lines.get(0);
+                    final String line = lines.get(l);
                     if (line.length() != width) throw new IllegalArgumentException(String.format("Error in line %d of layer %d: expected length %d but got %d", l+1, i+1, width, line.length()));
                     for (int w = 0; w < width; ++w) {
                         final char c = line.charAt(w);
-                        final BlockPos pos = new BlockPos(w, i, l);
-                        template.put(pos, c);
+						if (includeWhitespace || !Character.isWhitespace(c)) {
+							final BlockPos pos = new BlockPos(w, i, l);
+							template.put(pos, c);
+						}
                     }
                 }
-            }
+            } else break;
+
+            if (layers == 0) throw new IllegalStateException("No layers found for structure path: " + path);
         }
 
         this.width = width;
@@ -82,13 +85,15 @@ public class BaseStructureTemplate<T extends BaseStructureTemplate.BlockType> {
             .stream()
             .collect(Collectors.toMap(e -> e.getKey().getSign(), Map.Entry::getValue));
 
-        template.keySet()
-            .stream()
-            .map(position::offset)
-            .filter(isInChunk(chunkAccess))
-            .forEach(pos -> {
-                chunkAccess.setBlockState(pos, states.get(template.get(pos)), true);
-            });
+        for (final Map.Entry<BlockPos, Character> entry : template.entrySet()) {
+            final BlockPos pos = position.offset(entry.getKey());
+            if (isInChunk(pos, chunkAccess)) {
+                final BlockState state = states.get(entry.getValue());
+                if (state != null) {
+                    chunkAccess.setBlockState(pos, state, true);
+                }
+            }
+        }
     }
     
 
@@ -104,14 +109,14 @@ public class BaseStructureTemplate<T extends BaseStructureTemplate.BlockType> {
         return height;
     }
 
-    private final Predicate<BlockPos> isInChunk(final ChunkAccess chunkAccess) {
+    private boolean isInChunk(final BlockPos p, final ChunkAccess chunkAccess) {
         final ChunkPos pos = chunkAccess.getPos();
-        return p -> p.getX() >= pos.getMinBlockX() && p.getX() <= pos.getMaxBlockX() && p.getZ() >= pos.getMinBlockZ() && p.getZ() <= pos.getMaxBlockZ();
+        return  p.getX() >= pos.getMinBlockX() && p.getX() <= pos.getMaxBlockX() && p.getZ() >= pos.getMinBlockZ() && p.getZ() <= pos.getMaxBlockZ();
     }
 
     public Set<ChunkPos> getChunks(final BlockPos position) {
-        final int xShift = width % 16;
-        final int zShift = depth % 16;
+        final int xShift = width / 16;
+        final int zShift = depth / 16;
 
         final Set<ChunkPos> chunks = new HashSet<>();
 
