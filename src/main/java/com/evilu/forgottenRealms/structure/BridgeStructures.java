@@ -58,10 +58,8 @@ public class BridgeStructures {
         .withBlockState(BridgeStructureBlockType.STAIRS_END, Blocks.DEEPSLATE_BRICK_STAIRS.defaultBlockState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH))
         .withBlock(BridgeStructureBlockType.SIDE, Blocks.DEEPSLATE_BRICKS)
-        .withBlockState(BridgeStructureBlockType.ROOF_INNER, Blocks.DEEPSLATE_BRICK_WALL
-                .defaultBlockState()
-                .setValue(BlockStateProperties.EAST_WALL, WallSide.TALL)
-                .setValue(BlockStateProperties.WEST_WALL, WallSide.TALL))
+        .withBlock(BridgeStructureBlockType.ROOF_INNER, Blocks.DEEPSLATE_BRICKS)
+        .withBlock(BridgeStructureBlockType.ROOF_OUTER, Blocks.DEEPSLATE_BRICKS)
         .withBlock(BridgeStructureBlockType.LANTERN, Blocks.LANTERN);
 
     public static final StructureTemplate<BridgeStructureBlockType> EAST_WEST = structure("bridge_ew")
@@ -77,10 +75,8 @@ public class BridgeStructures {
         .withBlockState(BridgeStructureBlockType.STAIRS_END, Blocks.DEEPSLATE_BRICK_STAIRS.defaultBlockState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST))
         .withBlock(BridgeStructureBlockType.SIDE, Blocks.DEEPSLATE_BRICKS)
-        .withBlockState(BridgeStructureBlockType.ROOF_INNER, Blocks.DEEPSLATE_BRICK_WALL
-                .defaultBlockState()
-                .setValue(BlockStateProperties.NORTH_WALL, WallSide.TALL)
-                .setValue(BlockStateProperties.SOUTH_WALL, WallSide.TALL))
+        .withBlock(BridgeStructureBlockType.ROOF_INNER, Blocks.DEEPSLATE_BRICKS)
+        .withBlock(BridgeStructureBlockType.ROOF_OUTER, Blocks.DEEPSLATE_BRICKS)
         .withBlock(BridgeStructureBlockType.LANTERN, Blocks.LANTERN);
 
 
