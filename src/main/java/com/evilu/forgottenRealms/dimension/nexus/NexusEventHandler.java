@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class NexusEventHandler {
 
     @SubscribeEvent
-    public static void handleBlockModification(final BlockEvent.BlockToolModificationEvent event) {
+    public static void handleBlockModification(final BlockEvent.BlockToolInteractEvent event) {
         if (isInNexus(event.getWorld())) {
             event.setCanceled(true);
         }

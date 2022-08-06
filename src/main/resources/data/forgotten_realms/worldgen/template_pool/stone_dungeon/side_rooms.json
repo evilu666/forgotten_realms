@@ -1,0 +1,24 @@
+{
+  "name": "forgotten_realms:stone_dungeon/side_rooms",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/side_rooms/simple",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "minecraft:empty",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

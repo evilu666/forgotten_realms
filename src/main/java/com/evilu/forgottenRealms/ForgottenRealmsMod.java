@@ -1,10 +1,7 @@
 package com.evilu.forgottenRealms;
 
-import com.evilu.forgottenRealms.registry.BiomeRegistry;
-import com.evilu.forgottenRealms.registry.BiomeSourceRegistry;
-import com.evilu.forgottenRealms.registry.BlockRegistry;
-import com.evilu.forgottenRealms.registry.ChunkGeneratorRegistry;
-import com.evilu.forgottenRealms.registry.ItemRegistry;
+import com.evilu.forgottenRealms.networking.PacketDispatcher;
+import com.evilu.forgottenRealms.registry.*;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,10 +23,14 @@ public class ForgottenRealmsMod
 
     public ForgottenRealmsMod() {
 
+        RegistryRegistry.registerRegistries();
+
         BlockRegistry.registerBlocks();
+        SkillRegistry.registerSkills();
         ItemRegistry.registerItems();
         BiomeRegistry.registerBiomes();
         BiomeSourceRegistry.registerBiomeSources();
+        StructureFeatureRegistry.registerStructureFeatures();
         ChunkGeneratorRegistry.registerGenerators();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -38,6 +39,8 @@ public class ForgottenRealmsMod
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        PacketDispatcher.registerHandlers();
     }
 
     private void setup(final FMLCommonSetupEvent event) {}

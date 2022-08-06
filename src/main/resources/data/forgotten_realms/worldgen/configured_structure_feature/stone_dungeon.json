@@ -1,0 +1,17 @@
+{
+  "type": "forgotten_realms:custom_cave",
+  "biomes": "minecraft:plains",
+  "adapt_noise": true,
+  "spawn_overrides": {},
+  "config": {
+    "start_pool": "forgotten_realms:stone_dungeon/start",
+    "max_depth": 14,
+    "y_level": {
+      "type": "minecraft:uniform",
+      "value": {
+        "min_inclusive": 16,
+        "max_inclusive": 48
+      }
+    }
+  }
+}

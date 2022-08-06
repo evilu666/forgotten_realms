@@ -1,0 +1,5 @@
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="blockOut.xsd" size="3200 1600" type="FIXED_VANILLA" pause="true" lightbox="true">
+	<group spacing="10">
+		<text id="title" pos= "0 0" size="3200 50" textscale="8" textalign="MIDDLE_LEFT" text="Skill Tree" />
+	</group>
+</window>

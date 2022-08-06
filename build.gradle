@@ -13,8 +13,10 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
+    id "io.freefair.lombok" version "6.5.0.3"
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 
 version = '1.0.0'
@@ -127,6 +129,9 @@ minecraft {
         }
 
         data {
+        	property 'mixin.env.remapRefMap', 'true'
+          property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
             workingDirectory project.file('run')
 
             property 'forge.logging.markers', 'REGISTRIES'
@@ -160,6 +165,12 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+
+    maven {
+        url "https://cursemaven.com"
+    }
+
+    maven { url 'https://jitpack.io' }
     
 }
 
@@ -167,10 +178,26 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.54'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.68'
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.7.1:api")
+    implementation fg.deobf("curse.maven:blockui-522992:3669806")
+
+    implementation group: 'org.abego.treelayout', name: 'org.abego.treelayout.core', version: '1.0.3'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.23.1'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.2'
+    implementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
+
+    //compileOnly fg.deobf("curse.maven:quark-243121:3708587")
+    //compileOnly fg.deobf("curse.maven:autoreglib-250363:3642382")
+    //compileOnly fg.deobf("curse.maven:moonlight-499980:3842421")
+    //compileOnly fg.deobf("curse.maven:supplementaries-412082:3871187")
+    implementation fg.deobf("curse.maven:secretrooms-59652:3764897")
+    implementation fg.deobf("curse.maven:constructionwands-399558:3712396")
+
+
 
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
@@ -184,6 +211,13 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+}
+
+test {
+    useJUnitPlatform()
+    filter {
+        includeTestsMatching "*UnitTest"
+    }
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

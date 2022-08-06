@@ -1,0 +1,24 @@
+{
+  "name": "forgotten_realms:stone_dungeon/corridor_down",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/stairway/down_straight_small",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 10,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/stairway/down_straight_medium",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

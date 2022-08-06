@@ -1,0 +1,3 @@
+<skill_pane xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="blockOut.xsd" size="64 64" type="FIXED_VANILLA" pause="true" lightbox="true" id="skill_pane">
+	<buttonimage id="skill_button" source="forgotten_realms:textures/skill/test.png" size="256" pos="0 0" textscale="3"/>
+</skill_pane>

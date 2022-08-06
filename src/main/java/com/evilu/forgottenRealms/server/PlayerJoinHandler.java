@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
  * NewPlayerHandler
  */
 @Mod.EventBusSubscriber(modid = ForgottenRealmsMod.MODID, bus = Bus.FORGE)
-public class NewPlayerHandler {
+public class PlayerJoinHandler {
 
     private static LevelAccessor world = null;
 

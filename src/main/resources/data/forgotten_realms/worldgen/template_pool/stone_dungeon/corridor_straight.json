@@ -1,0 +1,33 @@
+{
+  "name": "forgotten_realms:stone_dungeon/corridor_straight",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 36,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/corridor/medium",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 12,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/corridor/small",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "forgotten_realms:stone_dungeon/corridor/tiny",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}
